@@ -5,6 +5,17 @@
         <h1 class="glitch" data-text="MAZNEVICH">MAZNEVICH</h1>
         <h2>Dead by Daylight Legend & Undisputed Champion</h2>
 
+        <nav class="main-nav">
+          <router-link to="/" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </router-link>
+          <router-link to="/builds" class="nav-link">
+            <i class="fas fa-hammer"></i>
+            <span>Builds</span>
+          </router-link>
+        </nav>
+
         <div class="stats-grid">
           <div
               v-for="stat in statistics"
@@ -144,6 +155,60 @@ header::before {
 
   .header-content h2 {
     font-size: 1.5rem;
+  }
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 8px;
+  color: var(--light);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(167, 139, 250, 0.3);
+}
+
+.nav-link i {
+  font-size: 1.1rem;
+}
+
+.nav-link.router-link-active {
+  background: rgba(167, 139, 250, 0.3);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.5);
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-link {
+    width: 200px;
+    justify-content: center;
   }
 }
 </style>

@@ -22,3 +22,18 @@ export interface SocialLink {
     url: string;
     title: string;
 }
+
+export interface Build {
+    id: string;
+    name: string;
+    image: string;
+    wikiUrl: string;
+    perks: BuildItem[];
+    addons: BuildItem[];
+}
+
+export interface BuildItem {
+    name: string;
+    icon: string;
+    wikiUrl: string;
+}
