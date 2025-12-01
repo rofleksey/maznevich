@@ -1,7 +1,6 @@
 export interface Tournament {
     name: string;
     result: string;
-    date: string;
     prize: string;
     type: 'win' | 'place2' | 'place3';
 }
