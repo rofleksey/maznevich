@@ -12,8 +12,7 @@ WORKDIR /app
 RUN npm install -g serve
 RUN apk update && \
     apk add --no-cache curl ca-certificates && \
-    update-ca-certificates && \
-    ulimit -n 100000
+    update-ca-certificates
 COPY --from=builder /app/dist ./dist
 EXPOSE 8080
 CMD ["serve", "-s", "dist", "-l", "8080"]
