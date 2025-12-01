@@ -1,10 +1,12 @@
 <template>
+  <Navigation />
   <RouterView />
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import Navigation from './components/Navigation.vue'
 
 const route = useRoute()
 

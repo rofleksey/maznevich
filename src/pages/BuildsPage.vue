@@ -1,10 +1,9 @@
 <template>
   <div class="builds-page">
-    <Header />
     <main>
       <div class="container">
-        <h1 class="page-title">KILLER BUILDS</h1>
-        <p class="page-subtitle">Maznevich's curated builds for maximum tournament performance</p>
+        <h1 class="page-title">BUILDS</h1>
+        <p class="page-subtitle">Maznevich's curated builds for maximum pub and tournament performance</p>
 
         <div class="builds-grid">
           <div
@@ -91,7 +90,6 @@
 </template>
 
 <script setup lang="ts">
-import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import { ref } from 'vue'
 import type { Build } from '../types'
@@ -104,40 +102,39 @@ const builds = ref<Build[]>([
     wikiUrl: 'https://deadbydaylight.fandom.com/wiki/The_Trapper',
     perks: [
       {
-        name: "Unnerving Presence",
-        icon: "https://static.wikia.nocookie.net/deadbydaylight_gamepedia/images/b/bf/FulliconPerk_unnervingPresence.png",
-        wikiUrl: "https://deadbydaylight.fandom.com/wiki/Unnerving_Presence"
+        name: "Corrupt Intervention",
+        icon: "/images/IconPerks_corruptIntervention.webp",
+        wikiUrl: "https://deadbydaylight.wiki.gg/wiki/Corrupt_Intervention"
       },
       {
-        name: "Brutal Strength",
-        icon: "https://static.wikia.nocookie.net/deadbydaylight_gamepedia/images/e/ed/FulliconPerk_brutalStrength.png",
-        wikiUrl: "https://deadbydaylight.fandom.com/wiki/Brutal_Strength"
+        name: "No Holds Barred (Deadlock)",
+        icon: "/images/IconPerks_NoHoldsBarred.webp",
+        wikiUrl: "https://deadbydaylight.wiki.gg/wiki/No_Holds_Barred"
       },
       {
-        name: "Agitation",
-        icon: "https://static.wikia.nocookie.net/deadbydaylight_gamepedia/images/4/44/FulliconPerk_agitation.png",
-        wikiUrl: "https://deadbydaylight.fandom.com/wiki/Agitation"
+        name: "Hex: No One Escaped Death",
+        icon: "/images/IconPerks_hexNoOneEscapesDeath.webp",
+        wikiUrl: "https://deadbydaylight.wiki.gg/wiki/Hex:_No_One_Escapes_Death"
       },
       {
-        name: "No One Escapes Death",
-        icon: "https://static.wikia.nocookie.net/deadbydaylight_gamepedia/images/8/8a/FulliconPerk_noOneEscapesDeath.png",
-        wikiUrl: "https://deadbydaylight.fandom.com/wiki/No_One_Escapes_Death"
-      }
+        name: "No Way Out",
+        icon: "/images/IconPerks_noWayOut.webp",
+        wikiUrl: "https://deadbydaylight.wiki.gg/wiki/No_Way_Out"
+      },
     ],
     addons: [
       {
-        name: "Trapper Bag",
-        icon: "https://static.wikia.nocookie.net/deadbydaylight_gamepedia/images/0/09/FulliconAddon_trapperBag.png",
-        wikiUrl: "https://deadbydaylight.fandom.com/wiki/Trapper_Bag"
+        name: "Bloody Coil",
+        icon: "/images/IconAddon_bloodyCoil.webp",
+        wikiUrl: "https://deadbydaylight.wiki.gg/wiki/Bloody_Coil"
       },
       {
-        name: "Coil Spring",
-        icon: "https://static.wikia.nocookie.net/deadbydaylight_gamepedia/images/4/4f/FulliconAddon_coilSpring.png",
-        wikiUrl: "https://deadbydaylight.fandom.com/wiki/Coil_Spring"
+        name: "Iridescent Stone",
+        icon: "/images/IconAddon_iridescentStone.webp",
+        wikiUrl: "https://deadbydaylight.wiki.gg/wiki/Iridescent_Stone"
       }
     ]
   }
-  // Add more killers here following the same structure
 ])
 </script>
 
@@ -195,7 +192,6 @@ const builds = ref<Build[]>([
 }
 
 .build-card:hover {
-  transform: translateY(-10px);
   border-color: var(--primary);
   box-shadow: 0 15px 30px rgba(167, 139, 250, 0.3);
 }
@@ -273,14 +269,12 @@ const builds = ref<Build[]>([
 }
 
 .perks-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 15px;
 }
 
 .addons-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 15px;
 }
 
@@ -289,10 +283,11 @@ const builds = ref<Build[]>([
   display: block;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   text-decoration: none;
+  width: 64px;
+  height: 64px;
 }
 
 .perk-item:hover,
@@ -305,7 +300,7 @@ const builds = ref<Build[]>([
 .perk-icon,
 .addon-icon {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   border-radius: 4px;
 }
