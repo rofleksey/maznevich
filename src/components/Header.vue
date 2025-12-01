@@ -12,6 +12,7 @@
               class="stat-card"
               @mouseenter="handleCardHover"
               @mouseleave="handleCardLeave"
+              @click="onCardClick(stat)"
           >
             <i :class="stat.icon"></i>
             <div class="number">{{ stat.value }}</div>
@@ -26,13 +27,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Statistic } from '../types'
+import {useRouter} from "vue-router";
+
+const router = useRouter()
 
 const statistics = ref<Statistic[]>([
   { icon: 'fas fa-trophy', value: '99+', label: 'Tournaments Won' },
   { icon: 'fas fa-clock', value: '19,000+', label: 'Hours in DBD' },
   { icon: 'fas fa-graduation-cap', value: '666+', label: 'Students Trained' },
-  { icon: 'fas fa-crown', value: '#1', label: 'Top Ladder Position' }
+  { icon: 'fas fa-crown', value: '#1', label: 'Top Ladder Position', link: '/ladder' }
 ])
+
+const onCardClick = (stat: Statistic) => {
+  if (!stat.link) {
+    return
+  }
+
+  router.push(stat.link)
+}
 
 const handleCardHover = (event: Event) => {
   const card = event.currentTarget as HTMLElement

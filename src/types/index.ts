@@ -14,6 +14,7 @@ export interface Statistic {
     icon: string;
     value: string;
     label: string;
+    link?: string;
 }
 
 export interface SocialLink {
