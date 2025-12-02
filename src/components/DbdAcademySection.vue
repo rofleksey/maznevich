@@ -28,10 +28,15 @@
             </div>
           </div>
 
-          <button class="enroll-button" @click="redirectToRegistration">
+          <a
+              href="https://academy.maznevich.pro"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="enroll-button"
+          >
             <i class="fas fa-arrow-right"></i>
             Enroll in DBD Academy
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -39,9 +44,7 @@
 </template>
 
 <script setup lang="ts">
-const redirectToRegistration = () => {
-  window.open('https://forms.gle/your-registration-form-link', '_blank')
-}
+// Component logic can be added here if needed
 </script>
 
 <style scoped>
@@ -107,7 +110,9 @@ const redirectToRegistration = () => {
 }
 
 .enroll-button {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   padding: 18px 40px;
   font-size: 1.2rem;
@@ -122,11 +127,15 @@ const redirectToRegistration = () => {
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 5px 15px rgba(167, 139, 250, 0.4);
+  text-decoration: none;
+  width: fit-content;
 }
 
 .enroll-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(167, 139, 250, 0.6);
+  color: var(--light);
+  text-decoration: none;
 }
 
 .enroll-button i {
@@ -146,6 +155,8 @@ const redirectToRegistration = () => {
   .enroll-button {
     width: 100%;
     padding: 15px 20px;
+    text-align: center;
+    justify-content: center;
   }
 }
 </style>
