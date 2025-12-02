@@ -7,6 +7,7 @@ import './styles/globals.css'
 import HomePage from './pages/HomePage.vue'
 import BuildsPage from './pages/BuildsPage.vue'
 import LadderPage from './pages/LadderPage.vue'
+import TournamentsPage from './pages/TournamentsPage.vue'
 
 // Create router
 const router = createRouter({
@@ -26,7 +27,12 @@ const router = createRouter({
             path: '/ladder',
             name: 'Ladder',
             component: LadderPage
-        }
+        },
+        {
+            path: '/tournaments',
+            name: 'Tournaments',
+            component: TournamentsPage
+        },
     ],
     scrollBehavior(_1, _2, savedPosition) {
         if (savedPosition) {

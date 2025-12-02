@@ -10,6 +10,8 @@
               v-for="stat in statistics"
               :key="stat.label"
               class="stat-card"
+              :title="getCardTitle(stat)"
+              :data-link="stat.link ? 'true' : null"
               @mouseenter="handleCardHover"
               @mouseleave="handleCardLeave"
               @click="onCardClick(stat)"
@@ -32,7 +34,7 @@ import {useRouter} from "vue-router";
 const router = useRouter()
 
 const statistics = ref<Statistic[]>([
-  { icon: 'fas fa-trophy', value: '99+', label: 'Tournaments Won' },
+  { icon: 'fas fa-trophy', value: '70+', label: 'Tournaments Won', link: '/tournaments' },
   { icon: 'fas fa-clock', value: '19,000+', label: 'Hours in DBD' },
   { icon: 'fas fa-graduation-cap', value: '666+', label: 'Students Trained' },
   { icon: 'fas fa-crown', value: '#1', label: 'Top Ladder Position', link: '/ladder' }
@@ -54,6 +56,10 @@ const handleCardHover = (event: Event) => {
 const handleCardLeave = (event: Event) => {
   const card = event.currentTarget as HTMLElement
   card.style.transform = 'translateY(0)'
+}
+
+const getCardTitle = (stat: Statistic) => {
+  return stat.link ? `Click to view ${stat.label.toLowerCase()}` : ''
 }
 </script>
 

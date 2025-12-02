@@ -2,7 +2,6 @@
   <div id="app">
     <Header />
     <main>
-      <TournamentSection />
       <RageSection />
       <AchievementsSection />
       <DbdAcademySection />
@@ -13,7 +12,6 @@
 
 <script setup lang="ts">
 import Header from '../components/Header.vue'
-import TournamentSection from '../components/TournamentSection.vue'
 import RageSection from '../components/RageSection.vue'
 import AchievementsSection from '../components/AchievementsSection.vue'
 import DbdAcademySection from '../components/DbdAcademySection.vue'

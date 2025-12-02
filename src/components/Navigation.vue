@@ -4,6 +4,10 @@
       <i class="fas fa-home"></i>
       <span>Home</span>
     </router-link>
+    <router-link to="/tournaments" class="nav-link">
+      <i class="fas fa-trophy"></i>
+      <span>Tournaments</span>
+    </router-link>
     <router-link to="/ladder" class="nav-link">
       <i class="fas fa-trophy"></i>
       <span>Ladder</span>

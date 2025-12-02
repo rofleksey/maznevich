@@ -1,25 +1,47 @@
 <template>
-  <section id="tournaments">
-    <div class="container">
-      <h2 class="section-title">TOURNAMENT DOMINATION</h2>
-      <div class="tournament-grid">
-        <div
-            v-for="tournament in tournaments"
-            :key="tournament.name"
-            :class="['tournament-card', tournament.type]"
-            @mouseenter="handleTournamentHover"
-        >
-          <div class="tournament-name">{{ tournament.name }}</div>
-          <div class="tournament-result">{{ tournament.result }}</div>
-          <div class="tournament-prize">{{ tournament.prize }}</div>
+  <div class="tournaments-page">
+    <main>
+      <div class="container">
+        <h1 class="page-title">TOURNAMENT HISTORY</h1>
+        <p class="page-subtitle">Maznevich's complete tournament record - The undisputed champion</p>
+
+        <div class="tournaments-container">
+          <div class="tournament-stats">
+            <div class="stat">
+              <div class="stat-value">{{ totalTournaments }}</div>
+              <div class="stat-label">Total Tournaments</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">{{ winCount }}</div>
+              <div class="stat-label">1st Place Finishes</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">${{ totalPrizeMoney }}</div>
+              <div class="stat-label">Prize Money</div>
+            </div>
+          </div>
+
+          <div class="tournament-grid">
+            <div
+                v-for="tournament in tournaments"
+                :key="tournament.name"
+                :class="['tournament-card', tournament.type]"
+            >
+              <div class="tournament-name">{{ tournament.name }}</div>
+              <div class="tournament-result">{{ tournament.result }}</div>
+              <div class="tournament-prize">{{ tournament.prize }}</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import Footer from '../components/Footer.vue'
+import { computed, ref } from 'vue'
 import type { Tournament } from '../types'
 
 const tournaments = ref<Tournament[]>([
@@ -116,15 +138,97 @@ const tournaments = ref<Tournament[]>([
   { name: "1V1 EVENT Singularity - FEBRUARY", result: "🥇 1st Place", prize: "$30", type: "win" }
 ])
 
-const handleTournamentHover = (event: Event) => {
-  const card = event.currentTarget as HTMLElement
-  card.style.transform = 'translateY(-5px)'
-}
+const totalTournaments = computed(() => tournaments.value.length)
+
+const winCount = computed(() =>
+    tournaments.value.filter(t => t.type === 'win').length
+)
+
+const totalPrizeMoney = computed(() => {
+  return tournaments.value.reduce((total, tournament) => {
+    const prize = parseInt(tournament.prize.replace(/[^0-9]/g, '')) || 0
+    return total + prize
+  }, 0).toLocaleString()
+})
 </script>
 
 <style scoped>
-#tournaments {
-  padding: 80px 0;
+.tournaments-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--darker) 0%, #1e1b4b 100%);
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 40px 0 20px;
+  color: var(--primary);
+  text-transform: uppercase;
+  position: relative;
+}
+
+.page-title::after {
+  content: '';
+  display: block;
+  width: 150px;
+  height: 4px;
+  background: var(--primary);
+  margin: 20px auto 30px;
+  border-radius: 2px;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 1.3rem;
+  color: var(--secondary);
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.tournaments-container {
+  padding-bottom: 80px;
+}
+
+.tournament-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.stat {
+  background: rgba(167, 139, 250, 0.1);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 2px solid rgba(167, 139, 250, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2);
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .tournament-grid {
@@ -141,10 +245,9 @@ const handleTournamentHover = (event: Event) => {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  min-height: 140px;
+  min-height: 160px;
 }
 
 .tournament-card:hover {
@@ -170,7 +273,7 @@ const handleTournamentHover = (event: Event) => {
   color: var(--secondary);
   margin-bottom: 10px;
   line-height: 1.3;
-  min-height: 3.4em; /* Allows for two lines of text */
+  min-height: 3.4em;
   display: flex;
   align-items: center;
 }
@@ -188,24 +291,44 @@ const handleTournamentHover = (event: Event) => {
   color: var(--success);
   font-weight: 600;
   font-size: 1.1rem;
-  margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
+  .page-title {
+    font-size: 2.5rem;
+  }
+
   .tournament-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tournament-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat {
+    padding: 20px 15px;
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+  }
+
+  .tournament-card {
+    min-height: 140px;
+    padding: 20px;
   }
 
   .tournament-name {
     font-size: 1.2rem;
     min-height: 2.8em;
   }
+}
 
-  .tournament-card {
-    min-height: 130px;
-    padding: 20px;
+@media (max-width: 576px) {
+  .tournament-stats {
+    grid-template-columns: 1fr;
   }
 }
 </style>
